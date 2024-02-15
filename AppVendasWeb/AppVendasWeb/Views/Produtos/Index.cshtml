@@ -1,0 +1,64 @@
+﻿@model IEnumerable<AppVendasWeb.Models.Produto>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Produtos</h1>
+
+<p>
+	<a asp-action="Create" class="btn btn-outline-light text-light btn btn-lg d-inline-flex align-items-center"> <svg class="me-3" bootstrap-icon="PlusCircle" width="24" height="24" aria-label="Adicionar"></svg>Adicionar</a>
+</p>
+
+<div>
+	<form method="post" asp-action="Search">
+		<div class="input-group mb-3">
+			<input type="text" class="form-control" name="searchString"
+				   placeholder="Pesquisar por nome" aria-label="Pesquisar por nome"
+				   aria-describedby="button-addon2">
+			<button class="btn btn-outline-light" type="submit" id="button-addon2">
+				<svg bootstrap-icon="Search" width="16" height="16" aria-label="Pesquisar"></svg>
+			</button>
+		</div>
+	</form>
+</div>
+
+<div class="table-responsive text-center">
+	<table class="text-light  table table-bordered border-secondary table-striped-columns">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.Descricao)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Preco)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Categoria)
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.Descricao)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Preco)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Categoria.CategoriaNome)
+					</td>
+					<td>
+						<a class="btn btn-outline-success me-3" asp-action="Edit" asp-route-id="@item.ProdutoId"><svg bootstrap-icon="PencilSquare" width="19" height="19" aria-label=""></svg></a>
+						<a class="btn btn-outline-info me-3" asp-action="Details" asp-route-id="@item.ProdutoId"><svg bootstrap-icon="Info" width="19" height="19" aria-label=""></svg></a>
+						<a class="btn btn-outline-danger me-3" asp-action="Delete" asp-route-id="@item.ProdutoId"><svg bootstrap-icon="Trash" width="19" height="19" aria-label=""></svg></a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<AppVendasWeb.Models.Venda>
+
+@{
+	ViewData["Title"] = "Vendas";
+}
+
+<h1>Vendas</h1>
+
+<p>
+	<a asp-action="Create" class="btn btn-outline-light text-light btn btn-lg d-inline-flex align-items-center"> <svg class="me-3" bootstrap-icon="PlusCircle" width="24" height="24" aria-label="Adicionar"></svg>Adicionar</a>
+</p>
+<div class="table-responsive text-center">
+	<table class="text-light  table table-bordered border-secondary table-striped-columns">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.DataVenda)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.ValorTotal)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.NotaFiscal)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Cliente)
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.DataVenda)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.ValorTotal)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.NotaFiscal)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Cliente.ClienteNome)
+					</td>
+					<td>
+						<a class="btn btn-outline-light me-3" asp-controller="ItemDaVendas" asp-action="Index" asp-route-id="@item.VendaId"><svg bootstrap-icon="PlusCircle" width="19" height="19" aria-label=""></svg></a>
+
+						<a class="btn btn-outline-success me-3" asp-action="Edit" asp-route-id="@item.VendaId"> <svg bootstrap-icon="PencilSquare" width="19" height="19" aria-label="Adicionar"></svg></a>
+						<a class="btn btn-outline-danger me-3" asp-action="Delete" asp-route-id="@item.VendaId"><svg bootstrap-icon="Trash" width="19" height="19" aria-label=""></svg></a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
